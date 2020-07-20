@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+  <ul class="navbar-nav">
+    <li class="nav-item" [ngClass]="{'active' : (currentRotue === 'app-cust-database'), 'inactive' : (currentRotue !== 'app-cust-database')}">
+      <a class="nav-link" href="#" routerLink="app-cust-database" (click)="setCurrentRoute('app-cust-database')">
+        Customer Database</a>
+    </li>
+    <li class="nav-item" [ngClass]="{'active' : (currentRotue === 'app-rain-schedule'), 'inactive' : (currentRotue !== 'app-rain-schedule')}">
+      <a class="nav-link" href="#" routerLink="app-rain-schedule" (click)="setCurrentRoute('app-rain-schedule')">
+        Rain Schedule</a>
+    </li>
+    <li class="nav-item" [ngClass]="{'active' : (currentRotue === 'app-analytics'), 'inactive' : (currentRotue !== 'app-analytics')}">
+      <a class="nav-link" href="#" routerLink="app-analytics" (click)="setCurrentRoute('app-analytics')">
+        Analytics</a>
+    </li>
+  </ul>
+<!-- </div> -->
+</nav>
+
+<router-outlet></router-outlet>

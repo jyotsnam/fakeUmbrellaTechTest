@@ -1,0 +1,165 @@
+<div class="table-container">
+    <h4>Customers</h4>
+    <p-table [value]="custData" [responsive]="true" dataKey="id" editMode="row">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Contact Person</th>
+                <th>Phone</th>
+                <th>Location</th>
+                <th>Number of Employees</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </ng-template>        
+        <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.name">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.contactPerson">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.contactPerson}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.phone">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.phone}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.location">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.location}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.numOfEmployees">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.numOfEmployees}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow
+                        class="ui-button-info p-table-button-icon" (click)="onRowEditInit(rowData)"><i
+                            class="pi pi-pencil" style="font-size: 1em"></i></button>
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow
+                        class="ui-button-success p-table-button-icon" style="margin-right: .5em"
+                        (click)="onRowEditSave(rowData)"><i class="pi pi-check" style="font-size: 1em"></i></button>
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow
+                        class="ui-button-danger p-table-button-icon" (click)="onRowEditCancel(rowData, ri)"><i
+                            class="pi pi-times" style="font-size: 1em"></i></button>
+                </td>
+                <td style="text-align:center">
+                    <button pButton type="button" pInitEditableRow class="ui-button-info p-table-button-icon"
+                        (click)="onRowDelete(rowData)">
+                        <i class="pi pi-trash" style="font-size: 1em"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <button class="add-cust-btn btn btn-primary" (click)=showForm()>Add Customer</button>
+    <div class="center-container" *ngIf="showAddForm">
+        <h4>Add customer</h4>
+        <form [formGroup]="custForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>
+                    Name:
+                </label>
+                <input class="form-control" type="text" formControlName="name">
+            </div>
+            <div *ngIf="custForm.controls.name.invalid && (custForm.controls.name.dirty || custForm.controls.name.touched)"
+                class="alert alert-danger">
+                <small>
+                    Name is required.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>
+                    Person of contact:
+                </label>
+                <input class="form-control" type="text" formControlName="contactPerson">
+            </div>
+            <div *ngIf="custForm.controls.contactPerson.invalid && (custForm.controls.contactPerson.dirty || custForm.controls.contactPerson.touched)"
+                class="alert alert-danger">
+                <small>
+                    Name of contact person is required.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>
+                    Telephone number:
+                </label>
+                <input class="form-control" type="text" formControlName="phone">
+            </div>
+            <div *ngIf="custForm.controls.phone.invalid && (custForm.controls.phone.dirty || custForm.controls.phone.touched)"
+                class="alert alert-danger">
+                <small *ngIf="custForm.controls.phone.errors?.required">
+                    Phone number is required.
+                </small>
+                <small *ngIf="custForm.controls.phone.errors?.pattern">
+                    Please enter a valid phone number.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>
+                    Location (City):
+                </label>
+                <input class="form-control" type="text" formControlName="location">
+            </div>
+            <div *ngIf="custForm.controls.location.invalid && custForm.controls.location.errors?.required && (custForm.controls.location.dirty || custForm.controls.location.touched)"
+                class="alert alert-danger">
+                <small>
+                    Location city name is required.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>
+                    Number of employees:
+                </label>
+                <input class="form-control" type="text" formControlName="numOfEmployees">
+            </div>
+            <div *ngIf="custForm.controls.numOfEmployees.invalid && (custForm.controls.numOfEmployees.dirty || custForm.controls.numOfEmployees.touched)"
+                class="alert alert-danger">
+                <small *ngIf="custForm.controls.numOfEmployees.errors?.required">
+                    Number of employees is required.
+                </small>
+                <small *ngIf="custForm.controls.numOfEmployees.errors?.pattern">
+                    Please enter number.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-info" [disabled]="!custForm.valid">Add</button>
+                <button class="btn btn-link" (click)="showAddForm = false;">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

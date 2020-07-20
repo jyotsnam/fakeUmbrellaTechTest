@@ -1,0 +1,13 @@
+.inactive > .nav-link  {
+    color:#fff;
+    font-weight: 300;
+    &:hover {
+        font-weight: 500;
+        color: rgba(59, 56, 56, 0.5);;
+      }
+}
+
+.active {
+    color: #fff;
+    font-weight: 500;
+}

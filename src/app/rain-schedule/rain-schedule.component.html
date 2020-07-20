@@ -1,0 +1,34 @@
+<div class="table-container">
+    <h4>Customers having rain in next 5 days</h4>
+    <p-table [value]="displayData" [responsive]="true" dataKey="id" editMode="row">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Contact Person</th>
+                <th>Phone</th>
+                <th>Location</th>
+                <th>Rainy days</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+                <td pEditableColumn>
+                    {{rowData.name}}
+                </td>
+                <td>
+                    {{rowData.contactPerson}}
+                </td>
+                <td>
+                    {{rowData.phone}}
+                </td>
+                <td>
+                    {{rowData.location}}
+                </td>
+                <td>
+                    {{rowData.dates.join(',')}}
+                </td>
+                
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

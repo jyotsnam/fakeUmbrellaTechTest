@@ -1,0 +1,20 @@
+.center-container {
+    width: 70%;
+    margin: 20px auto;
+    background: #d3d3d3;
+    padding: 10px;
+}
+
+.table-container {
+    margin: 20px auto;
+    width: 90%;
+
+    .add-cust-btn {
+        margin-top: 20px;
+    }
+
+    .p-table-button-icon {
+        border: none !important;
+        background: transparent;
+    }
+}
